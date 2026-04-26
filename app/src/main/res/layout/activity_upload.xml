@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F9FA">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Header -->
+        <TextView
+            android:text="Upload File"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#1A1A2E"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:text="Pick an image or PDF from your device"
+            android:textSize="14sp"
+            android:textColor="#6B7280"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Pick button -->
+        <Button
+            android:id="@+id/btnPickFile"
+            android:text="Choose File (Image or PDF)"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:backgroundTint="#7B1FA2"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- Preview image -->
+        <ImageView
+            android:id="@+id/ivPreview"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:scaleType="centerCrop"
+            android:background="#E0E0E0"
+            android:visibility="gone"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Status -->
+        <TextView
+            android:id="@+id/tvStatus"
+            android:text="No file selected"
+            android:textSize="14sp"
+            android:textColor="#6B7280"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- Progress -->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- OCR result preview + analyze button -->
+        <LinearLayout
+            android:id="@+id/layoutResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:text="Extracted text (preview)"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="#374151"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/tvOcrResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:background="#EEEEEE"
+                android:textSize="13sp"
+                android:textColor="#374151"
+                android:layout_marginBottom="20dp"/>
+
+            <Button
+                android:id="@+id/btnAnalyze"
+                android:text="Analyze with Grok AI"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:backgroundTint="#1976D2"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

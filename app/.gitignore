@@ -1,0 +1,53 @@
+# ===========================
+# SECRETS & CREDENTIALS (CRITICAL)
+# ===========================
+local.properties
+google-services.json
+*.jks
+*.keystore
+.env
+*.env.*
+
+# ===========================
+# ANDROID BUILD
+# ===========================
+*.iml
+.gradle/
+local.properties
+.idea/
+.DS_Store
+build/
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+*.ap_
+
+# ===========================
+# ANDROID STUDIO
+# ===========================
+*.iws
+*.ipr
+out/
+gen/
+.navigation/
+captures/
+
+# ===========================
+# KOTLIN / JAVA
+# ===========================
+*.class
+
+# ===========================
+# GRADLE
+# ===========================
+gradle-app.setting
+!gradle-wrapper.jar
+.gradletasknamecache
+
+# ===========================
+# OS
+# ===========================
+.DS_Store
+Thumbs.db

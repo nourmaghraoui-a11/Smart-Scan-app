@@ -1,0 +1,14 @@
+# Android / Gradle
+.gradle/
+build/
+app/build/
+
+# Local config (NE JAMAIS COMMIT)
+local.properties
+
+# IntelliJ / Android Studio
+.idea/
+*.iml
+
+# OS
+.DS_Store
