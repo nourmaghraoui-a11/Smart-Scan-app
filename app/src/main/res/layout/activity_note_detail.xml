@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F9FA">
+    android:background="?android:attr/windowBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,7 +24,7 @@
                 android:text="Résumé IA (Grok)"
                 android:textStyle="bold"
                 android:textSize="16sp"
-                android:textColor="#1976D2"/>
+                android:textColor="?android:attr/colorPrimary"/>
 
             <ImageButton
                 android:id="@+id/btnFavorite"
@@ -32,7 +32,8 @@
                 android:layout_height="48dp"
                 android:src="@android:drawable/btn_star_big_off"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Ajouter aux favoris"/>
+                android:contentDescription="Ajouter aux favoris"
+                android:tint="?android:attr/textColorPrimary"/>
 
             <Button
                 android:id="@+id/btnCopySummary"
@@ -48,8 +49,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="12dp"
-            android:background="@android:drawable/editbox_background"
-            android:textColor="#1A1A2E"
+            android:background="?android:attr/editTextBackground"
+            android:textColor="?android:attr/textColorPrimary"
             android:layout_marginBottom="16dp"
             android:lineSpacingExtra="4dp"/>
 
@@ -59,15 +60,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:textColor="#388E3C"/>
+            android:textColor="?android:attr/textColorPrimary"/>
 
         <TextView
             android:id="@+id/tvKeywords"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="12dp"
-            android:background="@android:drawable/editbox_background"
-            android:textColor="#2E7D32"
+            android:background="?android:attr/editTextBackground"
+            android:textColor="?android:attr/textColorPrimary"
             android:layout_marginBottom="24dp"/>
 
         <TextView
@@ -76,15 +77,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:textColor="#616161"/>
+            android:textColor="?android:attr/textColorSecondary"/>
 
         <TextView
             android:id="@+id/tvContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="12dp"
-            android:background="@android:drawable/editbox_background"
-            android:textColor="#424242"
+            android:background="?android:attr/editTextBackground"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="13sp"/>
 
     </LinearLayout>
