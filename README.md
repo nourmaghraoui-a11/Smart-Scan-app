@@ -17,9 +17,12 @@
 - 🤖 **Analyse IA** — Résumé et extraction de mots-clés via LLaMA 3.3 (Groq API)
 - 💾 **Sauvegarde locale** — Persistance des notes avec Room Database
 - 🔍 **Recherche** — Filtrage des notes par contenu ou mots-clés
+- ⭐ **Favoris** — Marquer et consulter ses notes favorites
+- 🔊 **Lecture vocale** — Double-tap sur un texte pour l'écouter (TextToSpeech)
 - 🔐 **Authentification** — Connexion / inscription via Firebase Auth
 - 🖼️ **Profil utilisateur** — Photo de profil personnalisable
 - 🌙 **Thème clair / sombre** — Bascule dynamique du thème
+- 🌍 **Multilingue** — Changement de langue (FR / EN) depuis le profil
 
 ---
 
@@ -35,6 +38,8 @@
 | Auth | Firebase Authentication |
 | Base de données | Room (SQLite) |
 | Réseau | Retrofit2 + OkHttp3 |
+| Lecture vocale | Android TextToSpeech |
+| Localisation | AppCompatDelegate (Per-app language) |
 | Thème | AppCompatDelegate (Night Mode) |
 
 ---
@@ -43,19 +48,19 @@
 
 ```
 com.example.myapplication/
-├── MainActivity.java               # Écran principal & navigation
+├── MainActivity.java               # Écran principal, navigation & favoris
 ├── UI/
 │   ├── CaptureActivity.java        # Scan via caméra + OCR
 │   ├── Uploadactivity.java         # Import fichier + OCR + analyse IA
-│   ├── NoteDetailActivity.java     # Détail d'une note + appel Groq
-│   ├── NotesListActivity.java      # Liste & recherche des notes
-│   ├── Profileactivity.java        # Authentification & profil
+│   ├── NoteDetailActivity.java     # Détail note + Groq + TTS + favoris
+│   ├── NotesListActivity.java      # Liste, recherche & vue favoris
+│   ├── Profileactivity.java        # Auth, profil & changement de langue
 │   └── GrokApi.java                # Interface Retrofit pour Groq
 ├── Data/
-│   ├── NoteRepository.java         # Accès Room DB
+│   ├── NoteRepository.java         # Accès Room DB (CRUD + favoris)
 │   └── AiRepository.java           # Modèles de requête/réponse Groq
 └── Model/
-    └── Note.java                   # Entité Room
+    └── Note.java                   # Entité Room (+ champ isFavorite)
 ```
 
 ---
@@ -72,8 +77,8 @@ com.example.myapplication/
 ### 1. Cloner le dépôt
 
 ```bash
-git clone https://github.com/<nourmaghraoui-a11>/notescanner-ai.git
-cd notescanner-ai
+git clone https://github.com/<nourmaghraoui-a11>/Smart-Scan-app
+cd Smart-Scan-app
 ```
 
 ### 2. Configurer Firebase
@@ -120,40 +125,15 @@ google-services.json      # Contient les credentials Firebase
 > ⚠️ Ne jamais commiter une clé API directement dans le code source.
 
 ---
-## Écrans de l'application
 
-### Écran de connexion
-![Sign in](images/sign-in-screen.jpeg)
+## 📸 Captures d'écran
 
-### Écran de création de compte
-![Sign up](images/sign-up-screen.jpeg)
-
-### Accueil (mode clair)
-![Home light](images/home-screen-light.jpeg)
-
-### Accueil (mode sombre)
-![Home dark](images/home-screen-dark.jpeg)
-
-### Profil
-![Profile](images/profile-screen.jpeg)
-
-### Scan
-![Scan](images/scan-screen.jpeg)
-
-### Upload
-![Upload](images/upload-screen.jpeg)
-
-### Notes
-![Notes](images/notes-screen.jpeg)
+| Accueil | Scan | Notes |
+|---|---|---|
+| *(à ajouter)* | *(à ajouter)* | *(à ajouter)* |
 
 ---
-
-
-
-
 
 ## 👨‍💻 Auteurs
 
-Projet académique réalisé dans le cadre du cours **[developpement mobile]** — **[ISAMM]** — Année **2025/2026**.
-
----
+Projet académique réalisé dans le cadre du cours **[dev mobile ]** — **[ISAMM]** — Année **2025/2026**.
