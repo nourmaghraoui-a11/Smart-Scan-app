@@ -14,6 +14,8 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.os.LocaleListCompat;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
@@ -38,7 +40,7 @@ public class Profileactivity extends AppCompatActivity {
     // Profile views (logged in)
     private LinearLayout layoutProfile;
     private TextView tvUserEmail;
-    private Button btnLogout;
+    private Button btnLogout, btnLangFr, btnLangEn;
     private ImageView ivProfilePic;
 
     private final ActivityResultLauncher<String> pickImage = registerForActivityResult(
@@ -82,6 +84,8 @@ public class Profileactivity extends AppCompatActivity {
         tvUserEmail    = findViewById(R.id.tvUserEmail);
         btnLogout      = findViewById(R.id.btnLogout);
         ivProfilePic   = findViewById(R.id.ivProfilePic);
+        btnLangFr      = findViewById(R.id.btnLangFr);
+        btnLangEn      = findViewById(R.id.btnLangEn);
 
         btnLogin.setOnClickListener(v -> loginUser());
         btnGoRegister.setOnClickListener(v -> showRegister());
@@ -91,7 +95,16 @@ public class Profileactivity extends AppCompatActivity {
         
         ivProfilePic.setOnClickListener(v -> pickImage.launch("image/*"));
 
+        btnLangFr.setOnClickListener(v -> setLocale("fr"));
+        btnLangEn.setOnClickListener(v -> setLocale("en"));
+
         refreshUI();
+    }
+
+    private void setLocale(String langCode) {
+        LocaleListCompat appLocales = LocaleListCompat.forLanguageTags(langCode);
+        AppCompatDelegate.setApplicationLocales(appLocales);
+        Toast.makeText(this, "Language changed to " + langCode, Toast.LENGTH_SHORT).show();
     }
 
     private void refreshUI() {

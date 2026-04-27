@@ -3,12 +3,15 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?android:attr/windowBackground"
     android:padding="16dp">
 
     <TextView
-        android:text="Mes notes"
+        android:id="@+id/tvNotesTitle"
+        android:text="@string/my_notes_title"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:textColor="?android:attr/textColorPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"/>
@@ -17,11 +20,13 @@
         android:id="@+id/etSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Rechercher par mots-clés..."
+        android:hint="@string/search_hint"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textColorHint="?android:attr/textColorSecondary"
         android:drawableStart="@android:drawable/ic_menu_search"
         android:drawablePadding="8dp"
         android:padding="12dp"
-        android:background="@android:drawable/editbox_background_normal"
+        android:background="?android:attr/editTextBackground"
         android:layout_marginBottom="16dp"/>
 
     <androidx.recyclerview.widget.RecyclerView

@@ -26,6 +26,14 @@
                 android:textSize="16sp"
                 android:textColor="#1976D2"/>
 
+            <ImageButton
+                android:id="@+id/btnFavorite"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@android:drawable/btn_star_big_off"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Ajouter aux favoris"/>
+
             <Button
                 android:id="@+id/btnCopySummary"
                 android:layout_width="wrap_content"

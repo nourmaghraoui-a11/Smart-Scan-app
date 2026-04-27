@@ -4,8 +4,11 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +24,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -29,39 +33,128 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class NoteDetailActivity extends AppCompatActivity {
+public class NoteDetailActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
 
     private static final String TAG = "NoteDetailActivity";
     TextView tvContent, tvSummary, tvKeywords;
     Button btnCopy;
+    ImageButton btnFavorite;
+    private TextToSpeech tts;
+    private long lastClickTime = 0;
+    private static final long DOUBLE_CLICK_TIME_DELTA = 300; 
+    
+    private NoteRepository repository;
+    private long currentNoteId = -1;
+    private boolean isFavorite = false;
 
     @Override
     protected void onCreate(Bundle b) {
         super.onCreate(b);
         setContentView(R.layout.activity_note_detail);
 
+        repository = new NoteRepository(this);
+
         tvContent = findViewById(R.id.tvContent);
         tvSummary = findViewById(R.id.tvSummary);
         tvKeywords = findViewById(R.id.tvKeywords);
         btnCopy = findViewById(R.id.btnCopySummary);
+        btnFavorite = findViewById(R.id.btnFavorite);
+
+        tts = new TextToSpeech(this, this);
+
+        setupDoubleTap(tvSummary);
+        setupDoubleTap(tvContent);
 
         btnCopy.setOnClickListener(v -> copyToClipboard(tvSummary.getText().toString()));
+        
+        btnFavorite.setOnClickListener(v -> toggleFavorite());
 
         String ocr = getIntent().getStringExtra("OCR");
         if (ocr != null) {
             tvContent.setText(ocr);
             callGrok(ocr);
         } else {
-            long noteId = getIntent().getLongExtra("NOTE_ID", -1);
-            if (noteId != -1) {
-                Note n = new NoteRepository(this).getById(noteId);
+            currentNoteId = getIntent().getLongExtra("NOTE_ID", -1);
+            if (currentNoteId != -1) {
+                Note n = repository.getById(currentNoteId);
                 if (n != null) {
                     tvContent.setText(n.content);
                     tvSummary.setText(n.summary);
                     tvKeywords.setText(n.keywords);
+                    isFavorite = n.isFavorite;
+                    updateFavoriteUI();
                 }
             }
         }
+    }
+
+    private void toggleFavorite() {
+        if (currentNoteId == -1) {
+            Toast.makeText(this, "Sauvegardez d'abord la note", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        isFavorite = !isFavorite;
+        repository.toggleFavorite(currentNoteId, isFavorite);
+        updateFavoriteUI();
+        Toast.makeText(this, isFavorite ? "Ajouté aux favoris ⭐" : "Retiré des favoris", Toast.LENGTH_SHORT).show();
+    }
+
+    private void updateFavoriteUI() {
+        if (isFavorite) {
+            btnFavorite.setImageResource(android.R.drawable.btn_star_big_on);
+        } else {
+            btnFavorite.setImageResource(android.R.drawable.btn_star_big_off);
+        }
+    }
+
+    private void setupDoubleTap(View view) {
+        view.setOnClickListener(v -> {
+            long clickTime = System.currentTimeMillis();
+            if (clickTime - lastClickTime < DOUBLE_CLICK_TIME_DELTA) {
+                if (tts != null && tts.isSpeaking()) {
+                    tts.stop();
+                    Toast.makeText(this, "Lecture arrêtée", Toast.LENGTH_SHORT).show();
+                } else {
+                    String text = ((TextView)v).getText().toString();
+                    if (!text.isEmpty() && !text.equals("Pas de résumé")) {
+                        speak(text);
+                    }
+                }
+            }
+            lastClickTime = clickTime;
+        });
+    }
+
+    private void speak(String text) {
+        if (tts != null) {
+            int result = tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, "ID1");
+            if (result == TextToSpeech.ERROR) {
+                Toast.makeText(this, "Erreur de lecture vocale", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Lecture en cours...", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    @Override
+    public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+            int result = tts.setLanguage(Locale.FRENCH);
+            if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                tts.setLanguage(Locale.getDefault());
+            }
+        } else {
+            Toast.makeText(this, "Le moteur vocal n'est pas prêt", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
+        }
+        super.onDestroy();
     }
 
     private void copyToClipboard(String text) {
@@ -69,7 +162,7 @@ public class NoteDetailActivity extends AppCompatActivity {
         ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("Résumé Note", text);
         clipboard.setPrimaryClip(clip);
-        Toast.makeText(this, "Résumé copié dans le presse-papier", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Résumé copié", Toast.LENGTH_SHORT).show();
     }
 
     private void callGrok(String text) {
@@ -104,7 +197,7 @@ public class NoteDetailActivity extends AppCompatActivity {
 
         String apiKey = BuildConfig.GROK_API_KEY;
         if (apiKey == null || apiKey.isEmpty()) {
-            tvSummary.setText("Erreur : Clé API Groq non configurée.");
+            tvSummary.setText("Erreur : Clé API non configurée.");
             return;
         }
 
@@ -117,7 +210,6 @@ public class NoteDetailActivity extends AppCompatActivity {
                                 try {
                                     String jsonResult = response.body().choices.get(0).message.content;
                                     
-                                    // Nettoyage Markdown
                                     if (jsonResult.contains("```json")) {
                                         jsonResult = jsonResult.substring(jsonResult.indexOf("```json") + 7);
                                         if (jsonResult.contains("```")) {
@@ -158,22 +250,20 @@ public class NoteDetailActivity extends AppCompatActivity {
                                     n.summary = summary;
                                     n.keywords = keywords;
                                     n.createdAt = System.currentTimeMillis();
-                                    new NoteRepository(NoteDetailActivity.this).insert(n);
+                                    currentNoteId = repository.insert(n);
                                 } catch (Exception e) {
                                     Log.e(TAG, "Parsing error", e);
-                                    tvSummary.setText("Erreur parsing : " + e.getMessage());
+                                    tvSummary.setText("Erreur parsing.");
                                 }
-                            } else {
-                                tvSummary.setText("Groq n'a pas renvoyé de réponse.");
                             }
                         } else {
-                            tvSummary.setText("Erreur API Groq : " + response.code());
+                            tvSummary.setText("Erreur API.");
                         }
                     }
 
                     @Override
                     public void onFailure(Call<AiRepository.GrokResponse> call, Throwable t) {
-                        tvSummary.setText("Échec réseau : " + t.getMessage());
+                        tvSummary.setText("Échec réseau.");
                     }
                 });
     }

@@ -17,7 +17,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         
         // Clés API
-        buildConfigField("String", "GROK_API_KEY", "\""\")
+        buildConfigField("String", "GROK_API_KEY", "\"\"")
     }
 
     buildFeatures {

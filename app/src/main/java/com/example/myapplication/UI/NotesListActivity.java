@@ -27,11 +27,29 @@ public class NotesListActivity extends AppCompatActivity {
     private NoteRepository repository;
     private EditText etSearch;
     private NotesAdapter adapter;
+    private boolean showOnlyFavorites = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes_list);
+
+        showOnlyFavorites = getIntent().getBooleanExtra("SHOW_FAVORITES", false);
+        
+        TextView tvNotesTitle = findViewById(R.id.tvNotesTitle);
+        
+        // Use string resources for dynamic titles
+        if (showOnlyFavorites) {
+            setTitle(R.string.my_favorites_title);
+            if (tvNotesTitle != null) {
+                tvNotesTitle.setText(R.string.my_favorites_title);
+            }
+        } else {
+            setTitle(R.string.my_notes_title);
+            if (tvNotesTitle != null) {
+                tvNotesTitle.setText(R.string.my_notes_title);
+            }
+        }
 
         etSearch = findViewById(R.id.etSearch);
         recyclerView = findViewById(R.id.recyclerNotes);
@@ -55,7 +73,17 @@ public class NotesListActivity extends AppCompatActivity {
     }
 
     private void loadNotes(String query) {
-        List<Note> notes = repository.search(query);
+        List<Note> notes;
+        if (showOnlyFavorites) {
+            notes = repository.getFavorites();
+            if (!query.isEmpty()) {
+                notes.removeIf(note -> !note.content.toLowerCase().contains(query.toLowerCase()) && 
+                                      !note.summary.toLowerCase().contains(query.toLowerCase()) &&
+                                      !note.keywords.toLowerCase().contains(query.toLowerCase()));
+            }
+        } else {
+            notes = repository.search(query);
+        }
         adapter = new NotesAdapter(notes);
         recyclerView.setAdapter(adapter);
     }
@@ -80,6 +108,11 @@ public class NotesListActivity extends AppCompatActivity {
             holder.tvSummary.setText(note.summary);
             holder.tvKeywords.setText(note.keywords);
             
+            // Show indicator if favorite
+            if (note.isFavorite) {
+                holder.tvSummary.setText("⭐ " + note.summary);
+            }
+            
             holder.itemView.setOnClickListener(v -> {
                 Intent intent = new Intent(NotesListActivity.this, NoteDetailActivity.class);
                 intent.putExtra("NOTE_ID", note.id);
@@ -88,14 +121,14 @@ public class NotesListActivity extends AppCompatActivity {
 
             holder.itemView.setOnLongClickListener(v -> {
                 new AlertDialog.Builder(NotesListActivity.this)
-                        .setTitle("Supprimer la note")
-                        .setMessage("Voulez-vous vraiment supprimer cette note ?")
-                        .setPositiveButton("Supprimer", (dialog, which) -> {
+                        .setTitle(R.string.delete_note_title)
+                        .setMessage(R.string.delete_note_message)
+                        .setPositiveButton(R.string.delete_button, (dialog, which) -> {
                             repository.delete(note.id);
                             loadNotes(etSearch.getText().toString());
-                            Toast.makeText(NotesListActivity.this, "Note supprimée", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(NotesListActivity.this, R.string.note_deleted_toast, Toast.LENGTH_SHORT).show();
                         })
-                        .setNegativeButton("Annuler", null)
+                        .setNegativeButton(R.string.cancel_button, null)
                         .show();
                 return true;
             });

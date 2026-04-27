@@ -118,7 +118,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:text="Scan Document"
+                        android:text="@string/title_scan"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="#FFFFFF"
@@ -126,7 +126,7 @@
                         android:layout_height="wrap_content"/>
 
                     <TextView
-                        android:text="Use camera to capture and analyze text"
+                        android:text="@string/desc_scan"
                         android:textSize="13sp"
                         android:textColor="#BBDEFB"
                         android:layout_width="wrap_content"
@@ -174,7 +174,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:text="Upload File"
+                        android:text="@string/title_upload"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="#FFFFFF"
@@ -182,7 +182,7 @@
                         android:layout_height="wrap_content"/>
 
                     <TextView
-                        android:text="Import image or PDF from storage"
+                        android:text="@string/desc_upload"
                         android:textSize="13sp"
                         android:textColor="#E1BEE7"
                         android:layout_width="wrap_content"
@@ -230,7 +230,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:text="My Notes"
+                        android:text="@string/title_notes"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="#FFFFFF"
@@ -238,7 +238,7 @@
                         android:layout_height="wrap_content"/>
 
                     <TextView
-                        android:text="Browse and search your saved notes"
+                        android:text="@string/desc_notes"
                         android:textSize="13sp"
                         android:textColor="#C8E6C9"
                         android:layout_width="wrap_content"
@@ -249,6 +249,62 @@
                     android:text="›"
                     android:textSize="24sp"
                     android:textColor="#FFFFFF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Card: Favorites -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnFavorites"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="#FBC02D">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="20dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:text="⭐"
+                    android:textSize="36sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:text="@string/title_favorites"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="#1A1A2E"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:text="@string/desc_favorites"
+                        android:textSize="13sp"
+                        android:textColor="#5D4037"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <TextView
+                    android:text="›"
+                    android:textSize="24sp"
+                    android:textColor="#1A1A2E"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>

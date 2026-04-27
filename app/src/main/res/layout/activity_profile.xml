@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F9FA">
+    android:background="?android:attr/windowBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp"
             android:text="SmartScan Notes"
-            android:textColor="#1A1A2E"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="26sp"
             android:textStyle="bold" />
 
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:text="Sign in"
-                android:textColor="#1A1A2E"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -51,8 +51,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
-                android:background="@drawable/edit_text_bg"
+                android:background="?android:attr/editTextBackground"
                 android:hint="Email address"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textColorHint="?android:attr/textColorSecondary"
                 android:inputType="textEmailAddress"
                 android:padding="16dp" />
 
@@ -61,8 +63,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:background="@drawable/edit_text_bg"
+                android:background="?android:attr/editTextBackground"
                 android:hint="Password"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textColorHint="?android:attr/textColorSecondary"
                 android:inputType="textPassword"
                 android:padding="16dp" />
 
@@ -80,7 +84,7 @@
                 android:id="@+id/btnGoRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#FFFFFF"
+                android:backgroundTint="?android:attr/colorBackground"
                 android:text="Create an account"
                 android:textColor="#1976D2"
                 android:textSize="14sp" />
@@ -98,7 +102,7 @@
                 android:text="Create account"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="#1A1A2E"
+                android:textColor="?android:attr/textColorPrimary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"/>
@@ -106,30 +110,36 @@
             <EditText
                 android:id="@+id/etRegEmail"
                 android:hint="Email address"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textColorHint="?android:attr/textColorSecondary"
                 android:inputType="textEmailAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edit_text_bg"
+                android:background="?android:attr/editTextBackground"
                 android:padding="16dp"
                 android:layout_marginBottom="12dp"/>
 
             <EditText
                 android:id="@+id/etRegPassword"
                 android:hint="Password (min 6 chars)"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textColorHint="?android:attr/textColorSecondary"
                 android:inputType="textPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edit_text_bg"
+                android:background="?android:attr/editTextBackground"
                 android:padding="16dp"
                 android:layout_marginBottom="12dp"/>
 
             <EditText
                 android:id="@+id/etRegConfirm"
                 android:hint="Confirm password"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textColorHint="?android:attr/textColorSecondary"
                 android:inputType="textPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edit_text_bg"
+                android:background="?android:attr/editTextBackground"
                 android:padding="16dp"
                 android:layout_marginBottom="20dp"/>
 
@@ -148,7 +158,7 @@
                 android:text="Already have an account? Sign in"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#FFFFFF"
+                android:backgroundTint="?android:attr/colorBackground"
                 android:textColor="#1976D2"
                 android:textSize="14sp"/>
         </LinearLayout>
@@ -173,21 +183,21 @@
                     android:layout_height="match_parent"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:scaleType="centerCrop"
-                    android:background="#E0E0E0"/>
+                    android:background="?android:attr/colorBackground"/>
 
                 <ImageView
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_gravity="bottom|end"
                     android:src="@android:drawable/ic_menu_camera"
-                    android:backgroundTint="#FFFFFF"
+                    android:backgroundTint="?android:attr/colorBackground"
                     android:background="@android:drawable/editbox_background"/>
             </FrameLayout>
 
             <TextView
                 android:text="Logged in as"
                 android:textSize="14sp"
-                android:textColor="#6B7280"
+                android:textColor="?android:attr/textColorSecondary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
@@ -195,10 +205,44 @@
                 android:id="@+id/tvUserEmail"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="#1A1A2E"
+                android:textColor="?android:attr/textColorPrimary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="32dp"/>
+
+            <TextView
+                android:text="Langue / Language"
+                android:textSize="14sp"
+                android:textColor="?android:attr/textColorSecondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="32dp">
+
+                <Button
+                    android:id="@+id/btnLangFr"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Français"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="#1976D2"/>
+
+                <Button
+                    android:id="@+id/btnLangEn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="English"
+                    android:layout_marginStart="8dp"
+                    android:backgroundTint="#1976D2"/>
+            </LinearLayout>
 
             <Button
                 android:id="@+id/btnLogout"

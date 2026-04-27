@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F9FA">
+    android:background="?android:attr/windowBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
             android:text="Upload File"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:textColor="#1A1A2E"
+            android:textColor="?android:attr/textColorPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -24,7 +24,7 @@
         <TextView
             android:text="Pick an image or PDF from your device"
             android:textSize="14sp"
-            android:textColor="#6B7280"
+            android:textColor="?android:attr/textColorSecondary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"/>
@@ -46,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="220dp"
             android:scaleType="centerCrop"
-            android:background="#E0E0E0"
+            android:background="?android:attr/colorBackground"
             android:visibility="gone"
             android:layout_marginBottom="16dp"/>
 
@@ -55,7 +55,7 @@
             android:id="@+id/tvStatus"
             android:text="No file selected"
             android:textSize="14sp"
-            android:textColor="#6B7280"
+            android:textColor="?android:attr/textColorSecondary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"/>
@@ -80,7 +80,7 @@
                 android:text="Extracted text (preview)"
                 android:textSize="13sp"
                 android:textStyle="bold"
-                android:textColor="#374151"
+                android:textColor="?android:attr/textColorPrimary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"/>
@@ -90,9 +90,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="12dp"
-                android:background="#EEEEEE"
+                android:background="?android:attr/selectableItemBackground"
                 android:textSize="13sp"
-                android:textColor="#374151"
+                android:textColor="?android:attr/textColorPrimary"
                 android:layout_marginBottom="20dp"/>
 
             <Button

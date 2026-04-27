@@ -25,11 +25,11 @@ public class MainActivity extends AppCompatActivity {
     private ImageView ivProfile;
     private TextView tvPlaceholder;
     private ImageButton btnToggleTheme;
+    private View btnFavorites;
     private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Load theme preference before super.onCreate
         sharedPreferences = getSharedPreferences("ThemePrefs", MODE_PRIVATE);
         boolean isDarkMode = sharedPreferences.getBoolean("isDarkMode", false);
         if (isDarkMode) {
@@ -45,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
         ivProfile = findViewById(R.id.ivMainProfilePic);
         tvPlaceholder = findViewById(R.id.tvProfilePlaceholder);
         btnToggleTheme = findViewById(R.id.btnToggleTheme);
+        btnFavorites = findViewById(R.id.btnFavorites);
 
-        // If not logged in, redirect to log screen
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser == null) {
             startActivity(new Intent(this, Profileactivity.class));
@@ -58,19 +58,21 @@ public class MainActivity extends AppCompatActivity {
 
         btnToggleTheme.setOnClickListener(v -> toggleTheme());
 
-        // Scan with camera
         findViewById(R.id.btnScan).setOnClickListener(v ->
                 startActivity(new Intent(this, CaptureActivity.class)));
 
-        // Upload from gallery / file picker
         findViewById(R.id.btnUpload).setOnClickListener(v ->
                 startActivity(new Intent(this, Uploadactivity.class)));
 
-        // View saved notes
         findViewById(R.id.btnNotes).setOnClickListener(v ->
-                startActivity(new Intent(this,NotesListActivity.class)));
+                startActivity(new Intent(this, NotesListActivity.class)));
 
-        // Profile / logout
+        btnFavorites.setOnClickListener(v -> {
+            Intent intent = new Intent(this, NotesListActivity.class);
+            intent.putExtra("SHOW_FAVORITES", true);
+            startActivity(intent);
+        });
+
         findViewById(R.id.btnProfile).setOnClickListener(v ->
                 startActivity(new Intent(this, Profileactivity.class)));
     }
@@ -86,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
             editor.putBoolean("isDarkMode", true);
         }
         editor.apply();
-        // The activity will recreate automatically to apply the new theme
     }
 
     private void updateProfileUI(FirebaseUser user) {

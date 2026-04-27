@@ -6,4 +6,5 @@ public class Note {
     public String summary;
     public String keywords;
     public long createdAt;
+    public boolean isFavorite;
 }

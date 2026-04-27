@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="title_scan">Scan Document</string>
+    <string name="desc_scan">Use camera to capture and analyze text</string>
+    <string name="title_upload">Upload File</string>
+    <string name="desc_upload">Import image or PDF from storage</string>
+    <string name="title_notes">My Notes</string>
+    <string name="desc_notes">Browse and search your saved notes</string>
+    <string name="title_favorites">Favorites</string>
+    <string name="desc_favorites">Quickly access your important notes</string>
+
+    <string name="search_hint">Search by keywords...</string>
+    <string name="my_notes_title">My Notes</string>
+    <string name="my_favorites_title">My Favorites ⭐</string>
+    <string name="delete_note_title">Delete note</string>
+    <string name="delete_note_message">Are you sure you want to delete this note?</string>
+    <string name="delete_button">Delete</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="note_deleted_toast">Note deleted</string>
 </resources>

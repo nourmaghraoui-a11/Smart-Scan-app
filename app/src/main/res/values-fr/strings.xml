@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Mon Application</string>
+    <string name="title_scan">Scanner Document</string>
+    <string name="desc_scan">Utilisez la caméra pour capturer et analyser du texte</string>
+    <string name="title_upload">Charger Fichier</string>
+    <string name="desc_upload">Importer image ou PDF depuis le stockage</string>
+    <string name="title_notes">Mes Notes</string>
+    <string name="desc_notes">Parcourir et rechercher vos notes sauvegardées</string>
+    <string name="title_favorites">Favoris</string>
+    <string name="desc_favorites">Accédez rapidement à vos notes importantes</string>
+
+    <string name="search_hint">Rechercher par mots-clés…</string>
+    <string name="my_notes_title">Mes Notes</string>
+    <string name="my_favorites_title">Mes Favoris ⭐</string>
+    <string name="delete_note_title">Supprimer la note</string>
+    <string name="delete_note_message">Voulez-vous vraiment supprimer cette note ?</string>
+    <string name="delete_button">Supprimer</string>
+    <string name="cancel_button">Annuler</string>
+    <string name="note_deleted_toast">Note supprimée</string>
+</resources>
